@@ -6,9 +6,11 @@
 
 - 8 大类目，39 个实用工具
 - 纯客户端运行，数据不离开浏览器
+- 左侧边栏导航，快速切换类目
+- 常用工具记录（基于 localStorage，上限 10 个）
 - 暗色模式，跟随系统偏好或手动切换
 - 全文搜索，按 `/` 键快速聚焦
-- 响应式设计，支持移动端
+- 响应式设计，移动端侧边栏抽屉式弹出
 
 ## 类目
 
@@ -30,7 +32,14 @@ npm install
 npm start
 ```
 
-访问 http://localhost:8080
+- 本地访问：http://localhost:8080
+- WSL 访问（从 Windows）：http://172.22.182.62:8080
+
+> `npm start` 会同时启动 `server.js`（绑定 `0.0.0.0`）和 Eleventy watch（文件变更自动重建）。
+
+### WSL 网络说明
+
+Eleventy 内置 dev server 默认绑定 `localhost`，Windows 无法通过 WSL IP 访问。项目使用自定义 `server.js` 绑定 `0.0.0.0` 解决此问题。
 
 ## 构建
 
@@ -40,13 +49,9 @@ npm run build
 
 输出目录：`_site`
 
-## 部署到 Cloudflare Pages
+## 部署
 
-1. 将代码推送到 GitHub/GitLab
-2. 在 Cloudflare Pages 连接仓库
-3. 构建命令：`npm run build`
-4. 输出目录：`_site`
-5. Node.js 版本：18+
+详见 [DEPLOY.md](./DEPLOY.md)
 
 ## 添加新工具
 
