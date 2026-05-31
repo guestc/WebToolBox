@@ -1,0 +1,31 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<div class="hero">
+  <h1>WebToolBox</h1>
+  <p>面向开发者与爬虫工程师的免费在线工具集合，所有工具纯客户端运行，数据不离开浏览器</p>
+</div>
+
+{% for cat in categories %}
+<section class="home-category-section" data-category="{{ cat.id }}">
+  <div class="home-category-header">
+    <span class="cat-icon"><i data-lucide="{{ cat.icon }}"></i></span>
+    <h2>{{ cat.name }}</h2>
+    <a href="/tools/{{ cat.id }}/">查看全部 &rarr;</a>
+  </div>
+  <div class="tool-list">
+    {% for tool in collections.toolsByCategory[cat.id] %}
+    <a href="{{ tool.url }}" class="tool-card" data-title="{{ tool.data.title }}" data-desc="{{ tool.data.description }}">
+      <h3>{{ tool.data.title }}</h3>
+      <p>{{ tool.data.description }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+<div class="no-results" id="no-results">
+  <i data-lucide="search-x" style="width:48px;height:48px"></i>
+  <p>没有找到匹配的工具</p>
+</div>
+{% endblock %}

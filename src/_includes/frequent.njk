@@ -1,0 +1,36 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<div class="category-header">
+  <h1>
+    <span class="cat-icon"><i data-lucide="star"></i></span>
+    常用工具
+  </h1>
+  <p>根据你的使用频率自动排序，展示最常用的工具</p>
+</div>
+
+<div class="tool-list" id="frequent-list"></div>
+
+<div class="no-results" id="frequent-empty" style="display:block">
+  <i data-lucide="clock" style="width:48px;height:48px"></i>
+  <p>暂无使用记录，多用用工具就会出现在这里</p>
+</div>
+
+<script>
+(function() {
+  var list = document.getElementById('frequent-list');
+  var empty = document.getElementById('frequent-empty');
+  var tools = FrequentTools.getTop(10);
+  if (!tools.length) return;
+  empty.style.display = 'none';
+  tools.forEach(function(t) {
+    var a = document.createElement('a');
+    a.href = t.url;
+    a.className = 'tool-card';
+    a.innerHTML = '<h3>' + t.title + '</h3><p>' + t.category + '</p>';
+    list.appendChild(a);
+  });
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+})();
+</script>
+{% endblock %}

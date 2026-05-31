@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title or "WebToolBox" }} - WebToolBox</title>
+  <meta name="description" content="{{ description or '面向开发者的在线工具集合' }}">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon"><i data-lucide="wrench" style="width:20px;height:20px"></i></span>
+        <span>WebToolBox</span>
+      </a>
+      <div class="search-wrapper">
+        <span class="search-icon"><i data-lucide="search"></i></span>
+        <input type="text" class="search-input" id="search-input" placeholder="搜索工具..." autocomplete="off">
+      </div>
+      <div class="header-actions">
+        <button class="sidebar-toggle" id="sidebar-toggle" title="切换侧边栏">
+          <i data-lucide="menu" style="width:20px;height:20px"></i>
+        </button>
+        <button class="theme-toggle" id="theme-toggle" title="切换暗色模式">
+          <i data-lucide="moon" id="theme-icon-dark" style="width:20px;height:20px"></i>
+          <i data-lucide="sun" id="theme-icon-light" style="width:20px;height:20px;display:none"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="layout-wrapper">
+    <aside class="sidebar" id="sidebar">
+      <a href="/" {% if page.url == "/" %}class="active"{% endif %}>
+        <i data-lucide="home"></i>
+        <span>主页</span>
+      </a>
+      <a href="/frequent/" {% if page.url == "/frequent/" %}class="active"{% endif %}>
+        <i data-lucide="star"></i>
+        <span>常用工具</span>
+      </a>
+      <div class="sidebar-divider"></div>
+      {% for cat in categories %}
+      <a href="/tools/{{ cat.id }}/" {% if page.url == "/tools/" + cat.id + "/" or category == cat.id %}class="active"{% endif %}>
+        <i data-lucide="{{ cat.icon }}"></i>
+        <span>{{ cat.name }}</span>
+      </a>
+      {% endfor %}
+    </aside>
+
+    <main class="main-content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>WebToolBox - 面向开发者的免费在线工具集合</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script>
+  (function() {
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    var toggle = document.getElementById('sidebar-toggle');
+    if (toggle && sidebar && overlay) {
+      toggle.addEventListener('click', function() {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('open');
+      });
+      overlay.addEventListener('click', function() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
+      });
+    }
+  })();
+  </script>
+  {% if page.url == "/" %}
+  <script src="/assets/js/search.js"></script>
+  {% endif %}
+  {% if script %}
+  <script src="{{ script }}"></script>
+  {% endif %}
+</body>
+</html>

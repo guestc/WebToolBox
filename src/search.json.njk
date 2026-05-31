@@ -1,0 +1,7 @@
+---
+permalink: /search.json
+permalinkSuffix: ''
+---
+[{%- for tool in collections.allTools %}
+{"title":"{{ tool.data.title }}","desc":"{{ tool.data.description }}","category":"{{ tool.data.category }}","url":"{{ tool.url }}"}{% if not loop.last %},{% endif %}
+{%- endfor %}]

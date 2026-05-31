@@ -1,0 +1,19 @@
+{
+  "name": "webtoolbox",
+  "version": "1.0.0",
+  "description": "面向开发者的在线工具集合网站",
+  "scripts": {
+    "start": "npx @11ty/eleventy && setsid node server.js > /tmp/server.log 2>&1 & npx @11ty/eleventy --watch",
+    "build": "npx @11ty/eleventy"
+  },
+  "keywords": [
+    "toolbox",
+    "utilities",
+    "web-tools"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "serve": "^14.2.6"
+  }
+}

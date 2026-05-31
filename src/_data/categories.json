@@ -1,0 +1,10 @@
+[
+  {"id":"cookie","name":"Cookie 管理","icon":"cookie","desc":"Cookie的导入导出、编辑对比","order":1},
+  {"id":"header","name":"请求头工具","icon":"arrow-left-right","desc":"HTTP请求头编辑、cURL转换","order":2},
+  {"id":"encoding","name":"编码/解码","icon":"braces","desc":"Base64、URL、HTML实体等编解码","order":3},
+  {"id":"crypto","name":"加密/哈希","icon":"lock","desc":"MD5、SHA、AES、JWT等工具","order":4},
+  {"id":"network","name":"URL/网络","icon":"globe","desc":"URL解析、DNS查询、IP工具","order":5},
+  {"id":"text","name":"文本处理","icon":"file-text","desc":"正则测试、去重、Diff对比","order":6},
+  {"id":"converter","name":"数据转换","icon":"repeat","desc":"JSON/CSV/XML/YAML互转","order":7},
+  {"id":"generator","name":"随机生成","icon":"shuffle","desc":"密码、UUID、UA等随机数据生成","order":8}
+]

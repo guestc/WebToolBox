@@ -1,0 +1,22 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<div class="breadcrumb">
+  <a href="/">首页</a>
+  <span class="separator">/</span>
+  <a href="/tools/{{ category }}/">{{ categoryName }}</a>
+  <span class="separator">/</span>
+  <span>{{ title }}</span>
+</div>
+
+<div class="tool-page">
+  <h1>{{ title }}</h1>
+  <p class="tool-desc">{{ description }}</p>
+
+  {{ content | safe }}
+</div>
+
+<script>
+FrequentTools.record('{{ page.url }}', '{{ title }}', '{{ categoryName }}');
+</script>
+{% endblock %}
